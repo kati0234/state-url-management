@@ -19,6 +19,7 @@ const page = () => {
                   height={500}
                   className="h-full w-full object-contain object-center"
                   src="/tshirt.png"
+                  priority
                 />
               </div>
               <div className="relative flex flex-1 flex-col justify-between p-4 py-2">

@@ -15,6 +15,7 @@ const page = () => {
                 height={500}
                 className="h-full w-full object-contain object-center"
                 src="/tshirt.png"
+                priority
               />
             </div>
           </div>
@@ -27,10 +28,11 @@ const page = () => {
               <fieldset className="my-4">
                 <legend className="sr-only">Sizes</legend>
                 <div className="flex flex-wrap gap-3">
-                  {sizes.map((size) => {
+                  {sizes.map((size, index) => {
                     return (
                       <Link
-                        className="border-neutral-200 bg-white text-neutral-900 hover:bg-neutral-100 relative flex min-w-[5ch] items-center justify-center rounded border p-3 text-center text-sm font-semibold"
+                        key={index}
+                        className="border-neutral-200 text-neutral-900 hover:bg-neutral-100 relative flex min-w-[5ch] items-center justify-center rounded border p-3 text-center text-sm font-semibold"
                         href="#"
                       >
                         {size}
@@ -42,10 +44,11 @@ const page = () => {
               <fieldset className="my-4">
                 <legend className="sr-only">Colors</legend>
                 <div className="flex flex-wrap gap-3">
-                  {colors.map((color) => {
+                  {colors.map((color, index) => {
                     return (
                       <Link
-                        className="border-neutral-200 bg-white text-neutral-900 hover:bg-neutral-100 relative flex min-w-[5ch] items-center justify-center rounded border p-3 text-center text-sm font-semibold"
+                        key={index}
+                        className="border-neutral-200 text-neutral-900 hover:bg-neutral-100 relative flex min-w-[5ch] items-center justify-center rounded border p-3 text-center text-sm font-semibold"
                         href="#"
                       >
                         {color}
