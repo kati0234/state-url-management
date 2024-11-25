@@ -1,8 +1,23 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { useCallback } from "react";
 const page = () => {
   const sizes = ["sx", "s", "m", "l", "xl"];
   const colors = ["White", "Black", "Gray"];
+  const searchParams = useSearchParams();
+
+  const createQueryString = useCallback(
+    (name, value) => {
+      const params = new URLSearchParams(searchParams);
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams]
+  );
+
   return (
     <main className="flex-1">
       <section className="mx-auto grid max-w-7xl p-8">
@@ -32,8 +47,11 @@ const page = () => {
                     return (
                       <Link
                         key={index}
-                        className="border-neutral-200 text-neutral-900 hover:bg-neutral-100 relative flex min-w-[5ch] items-center justify-center rounded border p-3 text-center text-sm font-semibold"
-                        href="#"
+                        className={`${
+                          searchParams.get("size") === size &&
+                          "bg-blue-500 hover:bg-blue-500"
+                        } border-neutral-200 text-neutral-900 hover:bg-neutral-100 relative flex min-w-[5ch] items-center justify-center rounded border p-3 text-center text-sm font-semibold`}
+                        href={`?${createQueryString("size", size)}`}
                       >
                         {size}
                       </Link>
@@ -48,8 +66,13 @@ const page = () => {
                     return (
                       <Link
                         key={index}
-                        className="border-neutral-200 text-neutral-900 hover:bg-neutral-100 relative flex min-w-[5ch] items-center justify-center rounded border p-3 text-center text-sm font-semibold"
-                        href="#"
+                        className={`${
+                          searchParams.get("color") === color &&
+                          "bg-blue-500 hover:bg-blue-500"
+                        }
+
+                        "border-neutral-200 text-neutral-900 hover:bg-neutral-100 relative flex min-w-[5ch] items-center justify-center rounded border p-3 text-center text-sm font-semibold`}
+                        href={`?${createQueryString("color", color)}`}
                       >
                         {color}
                       </Link>
@@ -58,12 +81,13 @@ const page = () => {
                 </div>
               </fieldset>
               <div className="mt-8">
-                <button
+                <Link
+                  href={`/payment?${searchParams}`}
                   type="submit"
                   className="h-12 items-center rounded-md bg-neutral-900 px-6 py-3 text-base font-medium leading-6 text-white shadow hover:bg-neutral-800"
                 >
                   <span>Add to cart</span>
-                </button>
+                </Link>
               </div>
               <div className="mt-8 space-y-6 text-sm text-neutral-500">
                 <div>
